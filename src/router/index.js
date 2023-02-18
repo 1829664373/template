@@ -51,28 +51,64 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'dashboard' ,affix: true}
     }]
   },
-
+  {
+    path: '/administrato',
+    component: Layout,
+    redirect: '/administrato/geographicalMap',
+    name: 'Administrato',
+    meta: { title: '管理', icon: 'el-icon-s-help' , noCache: true },
+    children: [
+      {
+        path: 'geographicalMap',
+        name: 'GeographicalMap',
+        component: () => import('@/views/administrato/geographicalMap/index'),
+        meta: { title: '游戏地图', icon: 'table' }
+      },{
+        path: 'personage',
+        name: 'Personage',
+        component: () => import('@/views/administrato/personage/index'),
+        meta: { title: '角色管理', icon: 'tree'  }
+      },{
+        path: 'skill',
+        name: 'Skill',
+        component: () => import('@/views/administrato/skill/index'),
+        meta: { title: '技能管理', icon: 'table' ,noCache: false}
+      },{
+        path: 'game',
+        name: 'Game',
+        component: () => import('@/views/administrato/game/index'),
+        meta: { title: '游戏管理', icon: 'table' }
+      },
+      {
+        path: 'add/:id',
+        name: ':id',
+        component: () => import('@/views/administrato/skill/add'),
+        // meta: { title: '新增技能', icon: 'table' },
+        hidden: true
+      }
+    ]
+  },
   {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' , noCache: true },
+    meta: { title: 'Example', icon: 'el-icon-s-help'   ,noCache: false},
     children: [
       {
         path: 'table',
         name: 'Table',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' , noCache: true}
+        meta: { title: 'Table', icon: 'table'  ,noCache: false}
       },
       {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree'  , noCache: true}
+        meta: { title: 'Tree', icon: 'tree'   ,noCache: false}
       }
     ]
   },
@@ -159,7 +195,7 @@ export const constantRoutes = [
       }
     ]
   },
-
+  
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
